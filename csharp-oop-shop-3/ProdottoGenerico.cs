@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSharpShop
 {
+
     public class Prodotto
     {
         private int codice;
@@ -13,6 +14,12 @@ namespace CSharpShop
         private string descrizione;
         private double prezzo;
         private double IVA;
+
+        public Prodotto()
+        {
+
+        }
+
 
         public Prodotto(string nome, double prezzo, double IVA)
         {
@@ -42,7 +49,7 @@ namespace CSharpShop
             return this.nome;
         }
 
-        public void SetName(string nome)
+        public void SetNome(string nome)
         {
             this.nome = nome;
         }
@@ -100,6 +107,10 @@ namespace CSharpShop
             return numeroCodice;
         }
 
+        public void SetCodice()
+        {
+            this.codice = CalcoloCodice();
+        }
 
 
         public string StampaPrezzoBase()
