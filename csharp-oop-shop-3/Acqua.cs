@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,9 @@ namespace csharp_oop_shop_2
         private int ph;
         private string sorgente;
         private double litriDaBere;
+        private double acquabevuta;
+        private double acquaingalloni;
+        
 
         public Acqua()
         {
@@ -77,15 +81,24 @@ namespace csharp_oop_shop_2
         {
             return litriDaBere;
         }
-
+        public double GetAcquaBevuta()
+        {
+            return acquabevuta;
+        }
+        public double GetAcquaInGalloni()
+        {
+            return acquaingalloni;
+        }
         public void SetLitri(double litri)
         {
             if (litri < 0)
             {
+                this.litri = -1;
                 throw new ArgumentOutOfRangeException("litri", "La bottiglia non può avere una quantità di litri negativa");
             }
             else if (litri > 1.5)
             {
+                this.litri = -1;
                 throw new ArgumentOutOfRangeException("litri", "La bottiglia può contenere massimo 1,5 litri d'acqua");
             }
             else
@@ -120,10 +133,12 @@ namespace csharp_oop_shop_2
         {
             if (litriDaBere > litri)
             {
+                this.litriDaBere = -1;
                 throw new ArgumentOutOfRangeException("litriDaBere", "Non puoi bere più acqua di quanta è nella bottiglia");
             }
             else if (litriDaBere < 0)
             {
+                this.litriDaBere = -1;
                 throw new ArgumentOutOfRangeException("litriDaBere", "Non puoi bere una quantità negativa di acqua");
             }
             else
@@ -132,10 +147,23 @@ namespace csharp_oop_shop_2
             }
         }
 
-        private double AcquaBevuta()
+        public double SetAcquaBevuta( double acquabevuta)
         {
-            double acquabevuta = this.litri - this.litriDaBere;
-            return acquabevuta;
+           
+           if (this.litriDaBere > this.litri)
+            {
+                return acquabevuta = 1.5;
+            }
+            else
+            {
+                return acquabevuta = this.litri - this.litriDaBere;
+            }
+            
+        }
+        public double ConvertiInGalloni(double acquaingalloni)
+        {
+            return acquaingalloni = this.acquabevuta * 3.785;
+            
         }
 
 
@@ -146,7 +174,8 @@ namespace csharp_oop_shop_2
             Console.WriteLine("Ph: " + this.ph);
             Console.WriteLine("La sorgente è: " + this.sorgente);
             Console.WriteLine("Hai bevuto " + this.litriDaBere + " litri");
-            Console.WriteLine("L'acqua rimasta è " + AcquaBevuta());
+            Console.WriteLine("L'acqua rimasta è " + this.acquabevuta);
+            Console.WriteLine("La tua acqua in galloni è " + this.acquaingalloni + " galloni");
         }
 
     }
