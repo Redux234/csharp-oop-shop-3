@@ -19,8 +19,31 @@ namespace csharp_oop_shop_2
         public Acqua(string nome, string descrizione, double prezzo, double IVA, double litri, int ph, string sorgente) : base(nome, descrizione, prezzo, IVA)
         {
             this.sorgente = sorgente;
-            SetLitri(litri);
-            this.ph = ph;
+            if (litri  < 0 )
+            {
+                throw new ArgumentOutOfRangeException("litri", "La bottiglia non può avere una quantità di litri negativa");
+            }
+            else if(litri > 1.5)
+            {
+                throw new ArgumentOutOfRangeException("litri", "La bottiglia può contenere massimo 1,5 litri d'acqua");
+            }
+            else
+            {
+                SetLitri(litri);
+            }
+            if (ph < 0)
+            {
+                throw new ArgumentOutOfRangeException("ph", "L'acqua non può avere un valore di ph negativo");
+            }
+            else if(ph>10)
+            {
+                throw new ArgumentOutOfRangeException("ph", "L'acqua non può avere un valore di ph superiore a 10");
+            }
+            else
+            {
+                this.ph = ph;
+            }
+            
 
         }
 
@@ -42,32 +65,32 @@ namespace csharp_oop_shop_2
         {
             if (litri < 0)
             {
-                this.litri = 0;
-
+                throw new ArgumentOutOfRangeException("litri", "La bottiglia non può avere una quantità di litri negativa");
             }
             else if (litri > 1.5)
             {
-                this.litri = 1.5;
+                throw new ArgumentOutOfRangeException("litri", "La bottiglia può contenere massimo 1,5 litri d'acqua");
             }
             else
             {
-                this.litri = litri;
+                SetLitri(litri);
             }
         }
         public void SetPh(int ph)
         {
             if (ph < 0)
             {
-                ph = 0;
+                throw new ArgumentOutOfRangeException("ph", "L'acqua non può avere un valore di ph negativo");
             }
-            else if (ph > 7)
+            else if (ph > 10)
             {
-                ph = 7;
+                throw new ArgumentOutOfRangeException("ph", "L'acqua non può avere un valore di ph superiore a 10");
             }
             else
             {
                 this.ph = ph;
             }
+
         }
         public void SetSorgente(string sorgente)
         {
